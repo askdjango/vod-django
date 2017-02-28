@@ -1,28 +1,58 @@
 {% extends "blog/layout.html" %}
 
 {% block content %}
-    <form action="" method="get">
-        <input type="text" name="q" value="{{ q }}" />
-        <input type="submit" value="검색" />
-    </form>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Django Template <sup>by AskDjango</sup></h1>
+            <p>여러분의 파이썬/장고 페이스메이커가 되어드리겠습니다.</p>
+            <p>
+                <a class="btn btn-lg btn-primary" href="http://facebook.com/groups/askdjango">
+                        AskDjango 페이스북 그룹 &raquo;
+                    </a>
+            </p>
+        </div>
 
-    <ul>
-    {% for post in post_list %}
-        <li>
-            {{ post.id }}
-            <a href="{% url "blog:post_detail" post.id %}">
-                {{ post.title }}
-            </a>
-            <small>by {{ post.author }}</small>
-            <small>at {{ post.updated_at }}</small>
-        </li>
-    {% endfor %}
-    </ul>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="alert alert-info">
+                    <ul>
+                    <li>http://localhost:8000/blog/ 주소로 접속해보세요.</li>
+                    <li>템플릿 경로를 blog/templates/post_list.html 경로가 아닌
+                    blog/ templates/blog/post_list.html 경로를 쓰는 지에 대한 이유는,
+                    후에 Template Loader에서 설명합니다.</li>
+                    </ul>
+                </div>
 
-    <ul>
-    <li>http://localhost:8000/blog/ 주소로 접속해보세요.</li>
-    <li>템플릿 경로를 blog/templates/post_list.html 경로가 아닌
-    blog/ templates/blog/post_list.html 경로를 쓰는 지에 대한 이유는,
-    후에 Template Loader에서 설명합니다.</li>
-    </ul>
+                <p>
+                    <form action="" method="get">
+                        <input type="text" name="q" value="{{ q }}" />
+                        <input type="submit" value="검색" class="btn btn-primary" />
+                    </form>
+                </p>
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>title</th>
+                            <th>author</th>
+                            <th>updated_at</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for post in post_list %}
+                            <tr>
+                                <td>{{ post.id }}</td>
+                                <td><a href="{% url "blog:post_detail" post.id %}">{{ post.title }}</a></td>
+                                <td><small>by {{ post.author }}</small></td>
+                                <td><small>at {{ post.updated_at }}</small></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+
 {% endblock %}
