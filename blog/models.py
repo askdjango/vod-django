@@ -25,7 +25,7 @@ class Post(models.Model):
         validators=[lnglat_validator],
         help_text='경도/위도 포맷으로 입력')
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
-    tag_set = models.ManyToManyField('Tag')
+    tag_set = models.ManyToManyField('Tag', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
