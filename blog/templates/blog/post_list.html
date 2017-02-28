@@ -14,6 +14,17 @@
 </p>
 
 <ul>
+{% for post in post_list %}
+    <li>
+        {{ post.id }}
+        {{ post.title }}
+        <small>by {{ post.author }}</small>
+        <small>at {{ post.updated_at }}</small>
+    </li>
+{% endfor %}
+</ul>
+
+<ul>
 <li>http://localhost:8000/blog/ 주소로 접속해보세요.</li>
 <li>템플릿 경로를 blog/templates/post_list.html 경로가 아닌
 blog/ templates/blog/post_list.html 경로를 쓰는 지에 대한 이유는,
