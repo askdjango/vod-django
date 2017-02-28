@@ -1,42 +1,28 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0, user-scalable=no" />
-<title>AskDjango's' Blog</title>
-</head>
-<body>
+{% extends "blog/layout.html" %}
 
-<h1>AskDjango</h1>
+{% block content %}
+    <form action="" method="get">
+        <input type="text" name="q" value="{{ q }}" />
+        <input type="submit" value="검색" />
+    </form>
 
-<p>
-안녕하세요. 여러분의 파이썬/장고 페이스메이커가 되어드리겠습니다. ;)
-</p>
+    <ul>
+    {% for post in post_list %}
+        <li>
+            {{ post.id }}
+            <a href="/blog/{{ post.id }}/">
+                {{ post.title }}
+            </a>
+            <small>by {{ post.author }}</small>
+            <small>at {{ post.updated_at }}</small>
+        </li>
+    {% endfor %}
+    </ul>
 
-<form action="" method="get">
-    <input type="text" name="q" value="{{ q }}" />
-    <input type="submit" value="검색" />
-</form>
-
-<ul>
-{% for post in post_list %}
-    <li>
-        {{ post.id }}
-        <a href="/blog/{{ post.id }}/">
-            {{ post.title }}
-        </a>
-        <small>by {{ post.author }}</small>
-        <small>at {{ post.updated_at }}</small>
-    </li>
-{% endfor %}
-</ul>
-
-<ul>
-<li>http://localhost:8000/blog/ 주소로 접속해보세요.</li>
-<li>템플릿 경로를 blog/templates/post_list.html 경로가 아닌
-blog/ templates/blog/post_list.html 경로를 쓰는 지에 대한 이유는,
-후에 Template Loader에서 설명합니다.</li>
-</ul>
-
-</body>
-</html>
+    <ul>
+    <li>http://localhost:8000/blog/ 주소로 접속해보세요.</li>
+    <li>템플릿 경로를 blog/templates/post_list.html 경로가 아닌
+    blog/ templates/blog/post_list.html 경로를 쓰는 지에 대한 이유는,
+    후에 Template Loader에서 설명합니다.</li>
+    </ul>
+{% endblock %}
