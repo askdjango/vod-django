@@ -16,13 +16,23 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.shortcuts import redirect
+from django.views.generic import RedirectView
+
+
+# def root(request):
+#     return redirect('blog:post_list')
 
 urlpatterns = [
+    # url(r'^$', root, name='root'),
+    url(r'^$', lambda r: redirect('blog:post_list'), name='root'),
+    # url(r'^$', RedirectView.as_view(pattern_name='blog:post_list')),
+
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('accounts.urls')),
-    url(r'^blog/', include('blog.urls')),
-    url(r'^dojo/', include('dojo.urls')),
-    url(r'^shop/', include('shop.urls')),
+    url(r'^blog/', include('blog.urls', namespace='blog')),
+    url(r'^dojo/', include('dojo.urls', namespace='dojo')),
+    url(r'^shop/', include('shop.urls', namespace='shop')),
 ]
 
 if settings.DEBUG:
