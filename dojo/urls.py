@@ -4,6 +4,8 @@ from . import views
 from . import views_cbv
 
 urlpatterns = [
+    url(r'^new/$', views.post_new),
+
     url(r'^sum/(?P<numbers>[\d/]+)/$', views.mysum),
     url(r'^hello/(?P<name>[ㄱ-힣]+)/(?P<age>\d+)/$', views.hello),
 
