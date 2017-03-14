@@ -13,6 +13,8 @@ def post_list(request):
     if q:
         qs = qs.filter(title__icontains=q)
 
+    # messages.error(request, '에러메세지 테스트')
+
     return render(request, 'blog/post_list.html', {
         'post_list': qs,
         'q': q,
