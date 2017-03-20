@@ -36,10 +36,10 @@
                 <ul class="nav navbar-nav navbar-right">
                     {% if not user.is_authenticated %}
                         <li><a href="{% url "signup" %}">회원가입</a></li>
-                        <li><a href="{% url "login" %}">로그인</a></li>
+                        <li><a href="{% url "login" %}?next={{ request.path }}">로그인</a></li>
                     {% else %}
                         <li><a href="{% url "profile" %}">프로필</a></li>
-                        <li><a href="{% url "logout" %}">로그아웃</li>
+                        <li><a href="{% url "logout" %}?next={{ request.path }}">로그아웃</li>
                     {% endif %}
                 </ul>
             </div>
