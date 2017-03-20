@@ -6,17 +6,30 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .forms import PostForm
 from .models import Post
 
-def generate_view_fn(model):
-    def view_fn(request, id):
-        instance = get_object_or_404(model, id=id)
-        instance_name = model._meta.model_name
-        template_name = '{}/{}_detail.html'.format(model._meta.app_label, instance_name)
-        return render(request, template_name, {
-            instance_name: instance,
-        })
-    return view_fn
 
-post_detail = generate_view_fn(Post)
+class DetailView(object):
+    def __init__(self, model):
+        self.model = model
+
+    def get_object(self, *args, **kwargs):
+        return get_object_or_404(self.model, id=kwargs['id'])
+
+    def get_template_name(self):
+        return '{}/{}_detail.html'.format(self.model._meta.app_label, self.model._meta.model_name)
+
+    def dispatch(self, request, *args, **kwargs):
+        return render(request, self.get_template_name(), {
+            self.model._meta.model_name: self.get_object(*args, **kwargs),
+        })
+
+    @classmethod
+    def as_view(cls, model):
+        def view(request, *args, **kwargs):
+            self = cls(model)
+            return self.dispatch(request, *args, **kwargs)
+        return view
+
+post_detail = DetailView.as_view(Post)
 
 
 def post_new(request):
