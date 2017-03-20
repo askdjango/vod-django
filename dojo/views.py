@@ -6,12 +6,17 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .forms import PostForm
 from .models import Post
 
+def generate_view_fn(model):
+    def view_fn(request, id):
+        instance = get_object_or_404(model, id=id)
+        instance_name = model._meta.model_name
+        template_name = '{}/{}_detail.html'.format(model._meta.app_label, instance_name)
+        return render(request, template_name, {
+            instance_name: instance,
+        })
+    return view_fn
 
-def post_detail(request, id):
-    post = get_object_or_404(Post, id=id)
-    return render(request, 'dojo/post_detail.html', {
-        'post': post,
-    })
+post_detail = generate_view_fn(Post)
 
 
 def post_new(request):
