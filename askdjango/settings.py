@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'django_extensions',
     'imagekit',
+    'raven.contrib.django.raven_compat',
     'accounts',
     'blog',
     'dojo',
@@ -150,3 +151,18 @@ MESSAGE_TAGS = {constants.ERROR: 'danger'}
 
 NAVER_CLIENT_ID = 'SeqeC49hcAe8QbN_1LTp'  # FIXME: 이 값은 필히 개별 client id를 지정해주세요.
 
+
+import raven
+#ref #SentryDashboard
+GIT_ROOT = BASE_DIR   # FIXME: 현 프로젝트 ROOT 지정
+if os.path.exists(os.path.join(GIT_ROOT, '.git')):
+    release = raven.fetch_git_sha(GIT_ROOT) # 현재 최근 커밋해시 획득
+else:
+    release = 'dev'
+
+RAVEN_CONFIG = {
+    'dsn': 'https://34e1a1b632494201990e9e731d9bc999:0e8466b1f9a54481bc33cf0095d346e0@sentry.io/151861',
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    'release': release,
+}
