@@ -8,4 +8,6 @@
         <li>email : {{ user.email }}</li>
         <li>date_joined : {{ user.date_joined }}</li>
     </ul>
+
+    <img src="{{ user.socialaccount_set.all.first.get_avatar_url }}" />
 {% endblock %}
