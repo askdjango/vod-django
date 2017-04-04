@@ -17,7 +17,7 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.views.generic import RedirectView
 
 
@@ -26,7 +26,7 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
     # url(r'^$', root, name='root'),
-    url(r'^$', lambda r: redirect('blog:post_list'), name='root'),
+    url(r'^$', lambda request: render(request, 'root.html'), name='root'),
     # url(r'^$', RedirectView.as_view(pattern_name='blog:post_list')),
 
     url(r'^admin/', admin.site.urls),
