@@ -1,0 +1,6 @@
+django==1.10.5
+django-extensions
+ipython[notebook]
+django-bootstrap3
+pilkit
+django-imagekit
