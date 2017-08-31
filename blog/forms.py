@@ -8,7 +8,7 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ['title', 'content', 'photo', 'lnglat', 'tag_set']
         widgets = {
             'lnglat': NaverMapPointWidget(attrs={'width': 600, 'height': 300}),
         }

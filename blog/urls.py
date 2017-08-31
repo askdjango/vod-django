@@ -7,7 +7,7 @@ urlpatterns = [
     url(r'^$', views_cbv.post_list, name='post_list'),
     url(r'^(?P<pk>\d+)/$', views_cbv.post_detail, name='post_detail'),
 
-    url(r'^new/$', views.post_new, name='post_new'),
+    url(r'^new/$', views_cbv.post_new, name='post_new'),
     url(r'^(?P<id>\d+)/edit/$', views.post_edit, name='post_edit'),
 
     url(r'^comments/$', views.comment_list, name='comment_list'),

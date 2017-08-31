@@ -4,7 +4,7 @@ from django.template.loader import render_to_string
 from django.conf import settings  # django/conf/global_settings.py + askdjango/settings.py
 
 
-class NaverMapPointWidget(forms.TextInput):
+class NaverMapPointWidget(forms.HiddenInput):
     BASE_LAT, BASE_LNG = '37.497921', '127.027636' # 강남역
 
     def render(self, name, value, attrs):
@@ -34,4 +34,3 @@ class NaverMapPointWidget(forms.TextInput):
         parent_html = super().render(name, value, attrs)
 
         return parent_html + html
-
