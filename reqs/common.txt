@@ -1,6 +1,7 @@
-django==1.10.5
+django==1.11.4
 django-extensions
 ipython[notebook]
 django-bootstrap3
 pilkit
 django-imagekit
+raven
