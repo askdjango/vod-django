@@ -1,10 +1,25 @@
+{% extends "blog/layout.html" %}
+{% load bootstrap3 %}
 
-<!-- blog/templates/blog/post_form.html -->
-
-<form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-    </table>
-    <input type="submit" />
-</form>
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h4>Form</h4>
+                        </div>
+                        <div class="panel-body">
+                            {% bootstrap_form form %}
+                        </div>
+                        <div class="panel-footer">
+                            <input type="submit" class="btn btn-primary btn-block" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

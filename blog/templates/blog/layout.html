@@ -1,3 +1,19 @@
 {% extends "layout.html" %}
 
 {% block title %}AskDjango's Blog{% endblock %}
+
+{% block navbar-middle %}
+    {{ block.super }}
+
+    <ul class="nav navbar-nav">
+        <li>
+            <a href="{% url "blog:post_new" %}">New Post</a>
+        </li>
+    </ul>
+
+    <form action="{% url "blog:post_list" %}" method="get" class="navbar-form navbar-right">
+        <div class="form-group">
+            <input type="text" name="q" value="{{ q }}" class="form-control" placeholder="Search">
+        </div>
+    </form>
+{% endblock %}

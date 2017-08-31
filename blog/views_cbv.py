@@ -9,6 +9,17 @@ class PostListView(ListView):
     queryset = Post.objects.all().prefetch_related('tag_set', 'comment_set')
     paginate_by = 10
 
+    def get_queryset(self):
+        self.q = self.request.GET.get('q', '')
+        qs = super().get_queryset()
+        qs = qs.filter(title__icontains=self.q)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['q'] = self.q
+        return context
+
 post_list = PostListView.as_view()
 
 
